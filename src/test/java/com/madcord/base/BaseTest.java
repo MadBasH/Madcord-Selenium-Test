@@ -2,6 +2,8 @@ package com.madcord.base;
 
 import com.madcord.pages.BasePage;
 import com.madcord.pages.LoginPage;
+import com.madcord.pages.Credentials; // Import the Credentials class
+import com.madcord.tests.login.LoginTests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,6 +19,10 @@ public class BaseTest {
     protected WebDriver driver;
     protected BasePage basePage;
     protected LoginPage loginPage;
+
+    private Credentials credentials = new Credentials(); // Create a Credentials instance
+    protected String username = credentials.getUsername(); // Store username
+    protected String password = credentials.getPassword(); // Store password
 
     private String url = "https://madcord-final-production.up.railway.app/";
     private WebDriverWait wait;
@@ -38,6 +44,11 @@ public class BaseTest {
         // Login sayfasındaki öğeleri bekleme
         waitForElement(loginPage.getLoginButtonLocator());
         waitForElement(loginPage.getUsernameFieldLocator());
+
+        // Eğer test sınıfı LoginTests ise, giriş yapmayı atla
+        if (!(this instanceof LoginTests)) {
+            loginPage.logIntoApplication(username, password);
+        }
     }
 
     protected void waitForElement(By locator) {
@@ -47,7 +58,7 @@ public class BaseTest {
     @AfterClass
     public void tearDown() throws InterruptedException {
         if (driver != null) {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             driver.quit();
         }
     }

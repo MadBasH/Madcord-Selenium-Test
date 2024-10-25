@@ -2,33 +2,27 @@ package com.madcord.tests.servers;
 
 import com.madcord.pages.ServersPage;
 import static org.testng.Assert.*;
-
-import com.sun.source.tree.AssertTree;
 import org.testng.annotations.Test;
 import com.madcord.base.BaseTest;
 
 public class ServerTests extends BaseTest  {
-
     @Test
     public void testServersHeaderIsDisplayed() {
-        ServersPage serversPage = loginPage.
-                logIntoApplication("bayrakdar32@hotmail.com", "Testke123.");
+        ServersPage serversPage = new ServersPage();
         assertTrue(serversPage.isServersHeaderDisplayed(),
                 "\n Servers Header is not displayed \n");
     }
 
     @Test
     public void testServersImageIsDisplayed() {
-        ServersPage serversPage = loginPage.
-                logIntoApplication("bayrakdar32@hotmail.com", "Testke123.");
+        ServersPage serversPage = new ServersPage();
         assertTrue(serversPage.isServersImgDisplayed(),
                 "\n Servers Image is not displayed \n");
     }
 
     @Test
     public void testServersInvitePeople() {
-        ServersPage serversPage = loginPage.
-                logIntoApplication("bayrakdar32@hotmail.com", "Testke123.");
+        ServersPage serversPage = new ServersPage();
         serversPage.clickMenuButton();
         serversPage.clickInvitePeopleButton();
         serversPage.clickGenerateNewLinkButton();
@@ -40,10 +34,9 @@ public class ServerTests extends BaseTest  {
 
     @Test
     public void testServersChangeServerName() {
-        ServersPage serversPage = loginPage.
-                logIntoApplication("bayrakdar32@hotmail.com", "Testke123.");
+        ServersPage serversPage = new ServersPage();
         String oldServerName = serversPage.getServerName();
-//        System.out.println(oldServerName);
+        System.out.println("Old server name: " + oldServerName);
         serversPage.clickMenuButton();
         serversPage.clickServerSettingsButton();
         String newName = "changed-server-name";
@@ -51,7 +44,7 @@ public class ServerTests extends BaseTest  {
         serversPage.clickSaveButton();
         serversPage.setWaitForServerNameChange(newName);
         String newServerName = serversPage.getServerName();
-//        System.out.println(newServerName);
+        System.out.println("New server name: " + newServerName);
         assertNotEquals(oldServerName, newServerName,
                 "\n Server name is not changed \n");
     }
