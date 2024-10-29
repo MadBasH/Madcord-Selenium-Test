@@ -48,4 +48,71 @@ public class ServerTests extends BaseTest  {
         assertNotEquals(oldServerName, newServerName,
                 "\n Server name is not changed \n");
     }
+
+    @Test
+    public void testServersManageMembers() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickMenuButton();
+        serversPage.clickManageMembersButton();
+        assertTrue(serversPage.isManageMembersOpened(),
+                "\n Manage Members page is not displayed \n");
+    }
+
+    @Test
+    public void testServersCreateChannels() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickMenuButton();
+        serversPage.clickCreateChannelButton();
+        assertTrue(serversPage.isCreateChannelsOpened(),
+                "\n Create Channel page is not displayed \n");
+    }
+
+    @Test
+    public void testServersDeleteServer() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickMenuButton();
+        serversPage.clickDeleteServerButton();
+        assertTrue(serversPage.isDeleteServerOpened(),
+                "\n Delete Server page is not displayed \n");
+    }
+
+    @Test
+    public void testServersToggleMode() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickToggleMode();
+        serversPage.lightMode();
+        assertTrue(serversPage.isLightModeApplied(),
+                "\n Light Mode is not applied \n");
+        serversPage.clickToggleMode();
+        serversPage.darkMode();
+        assertTrue(serversPage.isDarkModeApplied(),
+                "\n Dark Mode is not applied \n");
+    }
+    
+    @Test
+    public void testServersSignOut() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickUserSettingsButton();
+        serversPage.clickSignOutButton();
+        assertTrue(serversPage.isSignOutSuccessful(),
+                "\n Sign Out is not successful \n");
+    }
+
+    @Test
+    public void testServersSearchBarShortcut() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.searchBarShortCut();
+        assertTrue(serversPage.isSearchBarOpened(),
+                "\n Search Bar Shortcut is not working \n");
+    }
+
+    @Test
+    public void testServersSearchBar() {
+        ServersPage serversPage = new ServersPage();
+        serversPage.clickSearchButton();
+        String searchParameter = "test-server";
+        serversPage.setSearchBar(searchParameter);
+        assertTrue(serversPage.isSearchSucessful(searchParameter),
+                "\n Searching is not successful \n");
+    }
 }
