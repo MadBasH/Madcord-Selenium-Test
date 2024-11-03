@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
 
+import static utilities.Utility.setUtilityDriver;
+
 public class BaseTest {
 
     protected WebDriver driver;
@@ -36,6 +38,7 @@ public class BaseTest {
 
         basePage = new BasePage();
         basePage.setDriver(driver);
+        setUtilityDriver();
         loginPage = new LoginPage();
 
         // WebDriverWait oluşturma
